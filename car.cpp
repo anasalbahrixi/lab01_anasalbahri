@@ -12,6 +12,7 @@ Car::Car(){
     headonDragCoeff = 0;
     horsepower = 0;
     backseatDoors = None;
+    seatCount = 0;
 }
 Car::Car(char const* const manufacturerName, char const* const modelName, PerformanceStats perf, uint8_t numSeats, DoorKind backseatDoorDesign){
     manufacturer = new char[strlen(manufacturerName)+1];
@@ -23,7 +24,6 @@ Car::Car(char const* const manufacturerName, char const* const modelName, Perfor
     headonDragCoeff = perf.headonDragCoeff;
     backseatDoors = backseatDoorDesign;
     seatCount = numSeats;
-    backseatDoors = backseatDoorDesign;
     
 }
 Car::Car(Car const& o){
@@ -38,6 +38,9 @@ Car::Car(Car const& o){
     seatCount = o.seatCount;
 }
 Car& Car::operator=(Car const& o){
+    if(this!=&o){
+        delete [] manufacturer;
+        delete [] model;
     manufacturer = new char[strlen(o.manufacturer)+1];
     strcpy(manufacturer,o.manufacturer);
     model = new char[strlen(o.model)+1];
@@ -47,6 +50,7 @@ Car& Car::operator=(Car const& o){
     horsepower = o.horsepower;
     backseatDoors = o.backseatDoors;
     seatCount = o.seatCount;
+    }
     return * this;
 }
 
@@ -72,10 +76,12 @@ DoorKind Car::getBackseatDoors() const{
     return backseatDoors;
 }
 void Car::manufacturerChange(char const* const newManufacturer){
+    delete [] manufacturer;
     manufacturer = new char[strlen(newManufacturer)+1];
     strcpy(manufacturer,newManufacturer);
 }
 void Car::modelNameChange(char const* const newModelName){
+    delete [] model;
     model = new char[strlen(newModelName)+1];
     strcpy(model,newModelName);
 }
