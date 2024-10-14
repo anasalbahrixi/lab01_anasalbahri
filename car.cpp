@@ -18,8 +18,13 @@ Car::Car(char const* const manufacturerName, char const* const modelName, Perfor
     strcpy(manufacturer,manufacturerName);
     model = new char[strlen(modelName)+1];
     strcpy(model,modelName);
+    horsepower = perf.horsepower;
+    zeroToSixtyNs = perf.zeroToSixtyNs;
+    headonDragCoeff = perf.headonDragCoeff;
     backseatDoors = backseatDoorDesign;
     seatCount = numSeats;
+    backseatDoors = backseatDoorDesign;
+    
 }
 Car::Car(Car const& o){
     manufacturer = new char[strlen(o.manufacturer)+1];
